@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.12</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Maptz.TimeCode.Base" Version="0.0.14" />
+    <PackageReference Include="Maptz.Timeline.Base" Version="0.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Maptz.Editing.Edl\Maptz.Editing.Edl.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Concepts\IEdlDeserializer.cs-70324c934ebd66e294a67adbf4a89fc6
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Concepts\IEdlDeserializerFactory.cs-f666251e40eb0d5d928f3f5a588b97db
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Concepts\IEdlEntry.cs-70110ea1fdcda23853047119ed525045
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Implementations\EdlDeserializerFactory\DefaultEdlDeserializerFactory.cs-12e8a11ddb744429e07b2e79e6d64112
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Implementations\EdlEntry\EDLEntry.cs-f79255a9707ee9f7b4c3061a220b4846
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Implementations\EdlMode\EdlModes.cs-29583c71b6339e093cd07051f7fc373a
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Implementations\EdlReaderServices\CMX3600EdlReaderService.cs-d7ef9b856a90af5993764da6bcb0d792
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Implementations\EdlReaderServices\GVGEdlReaderService.cs-b4d5f4f9831ff3f8f22a26edd8b761ac
+X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Maptz.Editing.Edl.csproj-a1138578cff2c29ee5b76eda4d4750ee
+
