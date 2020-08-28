@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maptz.Editing.Edl.Timelines\Maptz.Editing.Edl.Timelines.csproj" />
+    <ProjectReference Include="..\Maptz.Editing.Edl\Maptz.Editing.Edl.csproj" />
+  </ItemGroup>
+
+</Project>

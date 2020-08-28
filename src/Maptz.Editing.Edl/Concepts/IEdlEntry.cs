@@ -7,6 +7,11 @@ namespace Maptz.Editing.Edl
     /// </summary>
     public interface IEdlEntry
     {
+        ILevel Level { get; }
+        IPatch Patch { get; }
+
+        string Track { get;  }
+
         /* #region Public Properties */
         /// <summary>
         /// The clip name. 
