@@ -9,43 +9,6 @@ using System.Threading.Tasks;
 
 namespace Maptz.Editing.Edl.Converter
 {
-    public class JsonRoot
-    {
-        public IEnumerable<JsonTrack> VideoTracks { get; set; }
-        public IEnumerable<JsonTrack> AudioTracks { get; set; }
-    }
-    public class JsonTrack
-    {
-        public string Name { get; set; }
-        public IEnumerable<IEdlEntry> Entries { get; set; }
-    }
-
-    class EDLToJsonConverter
-    {
-        public static string Convert(IEnumerable<IEdlEntry> edlEntries)
-        {
-            var grp = edlEntries.GroupBy(p => p.Track);
-            var root = new JsonRoot
-            {
-                VideoTracks = grp.Where(p => p.Key.StartsWith("V")).Select(p => new JsonTrack
-                {
-                    Name = p.Key,
-                    Entries = p.ToArray()
-                }).ToArray(),
-                AudioTracks = grp.Where(p => p.Key.StartsWith("A")).Select(p => new JsonTrack
-                {
-                    Name = p.Key,
-                    Entries = p.ToArray()
-                }).ToArray(),
-            };
-
-            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            var json = JsonConvert.SerializeObject(root, Formatting.Indented, serializerSettings);
-            return json;
-
-        }
-    }
 
     class Program
     {

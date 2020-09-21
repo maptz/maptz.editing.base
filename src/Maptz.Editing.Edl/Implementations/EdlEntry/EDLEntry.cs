@@ -11,7 +11,7 @@ namespace Maptz.Editing.Edl
 
     public interface ILevel
     {
-        int Db { get; }
+        double Db { get; }
     }
 
     public class Patch : IPatch
@@ -27,7 +27,7 @@ namespace Maptz.Editing.Edl
 
     public class Level : ILevel
     {
-        public int Db
+        public double Db
         {
             get;set;
         }
@@ -76,6 +76,60 @@ namespace Maptz.Editing.Edl
         public string SourceOut { get; set; }
 
         public Patch Patch { get; set; }
+        public double? SourceFPS { get; set; }
+
+        public double? SequenceFPS { get; set; }
+
+
+        public double? RecordInSeconds
+        {
+            get => ToSeconds(this.RecordIn, this.SequenceFPS);
+        }
+        public double? RecordOutSeconds
+        {
+            get => ToSeconds(this.RecordOut, this.SequenceFPS);
+        }
+
+        public double? SourceInSeconds
+        {
+            get => ToSeconds(this.SourceIn, SourceFPS);
+        }
+        public double? SourceOutSeconds
+        {
+            get => ToSeconds(this.SourceOut, SourceFPS);
+        }
+
+        public double? ToSeconds(string str, double? fps)
+        {
+            var fr = GetFrameRate(fps);
+            if (fr == SmpteFrameRate.Unknown) return null;
+            var tc = new TimeCode(str, fr);
+            var t = tc.TotalSecondsPrecision;
+            return tc.TotalSeconds;
+
+
+
+        }
+
+        public static SmpteFrameRate GetFrameRate(double? fps)
+        {
+            switch (fps)
+            {
+                case null: return SmpteFrameRate.Unknown;
+                case 23.98: return SmpteFrameRate.Smpte2398;
+                case 24: return SmpteFrameRate.Smpte24;
+                case 25: return SmpteFrameRate.Smpte25;
+                //case 29.97: return SmpteFrameRate.Smpte2997Drop;
+                case 29.97: return SmpteFrameRate.Smpte2997NonDrop;
+                case 30: return SmpteFrameRate.Smpte30;
+                case 50: return SmpteFrameRate.Smpte25;
+                case 60: return SmpteFrameRate.Smpte30;
+
+                default: return SmpteFrameRate.Unknown;
+            }
+        }
+
+        
 
         ILevel IEdlEntry.Level => this.Level;
 

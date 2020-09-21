@@ -27,6 +27,8 @@ namespace Maptz.Editing.Edl
                 if (isMatch)
                 {
                     currentEdlEntry = new EdlEntry();
+                    currentEdlEntry.SequenceFPS = 25.0;
+                    currentEdlEntry.SourceFPS = 25.0; //Can be overridden if an M2 field is found.
                     cmxLines.Add(currentEdlEntry);
                     var track = line.Substring(14, 3);
                     currentEdlEntry.Track = track.Trim();
@@ -53,8 +55,12 @@ namespace Maptz.Editing.Edl
 
                     if (currentEdlEntry != null)
                     {
+                        if (line.StartsWith("* A1 VOL"))
+                        {
+
+                        }
                         var clipNamePrefix = "* FROM CLIP NAME: ";
-                        var volMatch = Regex.Match(line, "^\\*\\s+A[0-9]+\\sVOL\\s+=\\s+(?<level>[//-//+][0-9]+)");
+                        var volMatch = Regex.Match(line, "^\\*\\s+A[0-9]+\\sVOL\\s+=\\s+(?<level>[\\-\\+][0-9\\.]+)");
                         if (line.StartsWith(clipNamePrefix))
                         {
                             currentEdlEntry.ClipName = line.Substring(clipNamePrefix.Length);
@@ -74,15 +80,19 @@ namespace Maptz.Editing.Edl
                                 Target = int.Parse(match.Groups["record"].Value),
                             };
                         }
+                        else if (line.StartsWith("M2 "))
+                        {
+                            var fps = double.Parse(line.Substring(20, 5));
+                            currentEdlEntry.SourceFPS = fps;
+                        }
                         else if (volMatch.Success)
                         {
                             /////A3 VOL =  +8.0 DB  PAN R100 
                             currentEdlEntry.Level = new Level
                             {
-                                Db = int.Parse(volMatch.Groups["level"].Value)
+                                Db = double.Parse(volMatch.Groups["level"].Value)
                             };
                         }
-
                         
 
                         currentEdlEntry.Notes += line;
