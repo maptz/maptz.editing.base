@@ -63,7 +63,7 @@ namespace Maptz.Editing.Edl
                         var volMatch = Regex.Match(line, "^\\*\\s+A[0-9]+\\sVOL\\s+=\\s+(?<level>[\\-\\+][0-9\\.]+)");
                         if (line.StartsWith(clipNamePrefix))
                         {
-                            currentEdlEntry.ClipName = line.Substring(clipNamePrefix.Length);
+                            currentEdlEntry.ClipName = line.Substring(clipNamePrefix.Length + 1);
                         }
                         else if (line.StartsWith("* PATCH "))
                         {

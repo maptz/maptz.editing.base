@@ -103,12 +103,16 @@ namespace Maptz.Editing.Edl
         {
             var fr = GetFrameRate(fps);
             if (fr == SmpteFrameRate.Unknown) return null;
-            var tc = new TimeCode(str, fr);
-            var t = tc.TotalSecondsPrecision;
-            return tc.TotalSeconds;
-
-
-
+            try
+            {
+                var tc = new TimeCode(str, fr);
+                var t = tc.TotalSecondsPrecision;
+                return tc.TotalSeconds;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static SmpteFrameRate GetFrameRate(double? fps)
