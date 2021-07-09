@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -5,11 +6,27 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 namespace Maptz.Editing.Edl
 {
+    public class CMX3600DeserializerSettings
+    {
+        public bool IgnoreFps { get; set; }
+        public bool IgnoreLevels { get; set; }
+    }
     /// <summary>
     /// A deserializer for CMX3600 files. 
     /// </summary>
     public class CMX3600Deserializer : IEdlDeserializer
     {
+        public CMX3600Deserializer() 
+        {
+            Settings = new CMX3600DeserializerSettings();
+        }
+        public CMX3600Deserializer(IOptions<CMX3600DeserializerSettings> settings)
+        {
+            Settings = settings.Value;
+        }
+
+        public CMX3600DeserializerSettings Settings { get; }
+
         /// <summary>
         /// Read a set of EDL entries from an input string.
         /// </summary>
@@ -80,12 +97,12 @@ namespace Maptz.Editing.Edl
                                 Target = int.Parse(match.Groups["record"].Value),
                             };
                         }
-                        else if (line.StartsWith("M2 "))
+                        else if (line.StartsWith("M2 ") && !Settings.IgnoreFps)
                         {
                             var fps = double.Parse(line.Substring(20, 5));
                             currentEdlEntry.SourceFPS = fps;
                         }
-                        else if (volMatch.Success)
+                        else if (volMatch.Success && !Settings.IgnoreLevels)
                         {
                             /////A3 VOL =  +8.0 DB  PAN R100 
                             currentEdlEntry.Level = new Level
